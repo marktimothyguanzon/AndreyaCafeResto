@@ -1,23 +1,50 @@
+import { useState } from "react";
 import logo from "../../assets/logo/logo.png";
-import "../../styles/Navbar.css";
+import "../../styles/Header.css";
+
 function Navbar() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <header>
-       <div className="logo">
+    <header className="header">
+
+      <div className="container">
+
+        <div className="logo">
           <img src={logo} alt="Andreya Café & Resto" />
         </div>
-      <nav>
-        <h2>Andreya Café & Resto</h2>
 
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Menu</li>
-          <li>Gallery</li>
-          <li>Reservations</li>
-          <li>Contact</li>
-        </ul>
-      </nav>
+        <div
+          className={`hamburger ${open ? "active" : ""}`}
+          onClick={() => setOpen(!open)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <nav className={open ? "nav active" : "nav"}>
+
+          <ul>
+
+            <li><a href="#home" onClick={()=>setOpen(false)}>Home</a></li>
+
+            <li><a href="#about" onClick={()=>setOpen(false)}>About</a></li>
+
+            <li><a href="#menu" onClick={()=>setOpen(false)}>Menu</a></li>
+
+            <li><a href="#gallery" onClick={()=>setOpen(false)}>Gallery</a></li>
+
+            <li><a href="#reservation" onClick={()=>setOpen(false)}>Reservation</a></li>
+
+            <li><a href="#contact" onClick={()=>setOpen(false)}>Contact</a></li>
+
+          </ul>
+
+        </nav>
+
+      </div>
+
     </header>
   );
 }

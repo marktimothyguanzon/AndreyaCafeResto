@@ -1,4 +1,5 @@
 import "../../styles/MenuModal.css";
+import notebook from "../../assets/images/notebook-paper.jpg";
 
 type MenuModalProps = {
   isOpen: boolean;
@@ -15,8 +16,8 @@ function MenuModal({ isOpen, onClose }: MenuModalProps) {
 
       <div className="menu-modal">
 
-        <div className="modal-header">
-
+       <div className="modal-body"style={{ backgroundImage: `url(${notebook})` }}
+>
           <h2>Andreya Café & Resto Menu</h2>
 
           <button
