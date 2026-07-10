@@ -10,7 +10,7 @@ import gallery7 from "../../assets/images/gallery7.png";
 
 function Gallery() {
   return (
-    <section className="gallery">
+    <section className="gallery" id="gallery">
 
       <div className="container">
 

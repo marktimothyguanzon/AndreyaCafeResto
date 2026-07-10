@@ -7,7 +7,7 @@ function Hero() {
 
   return (
     <>
-      <section className="hero">
+      <section className="hero" id="home">
         <div className="hero-overlay">
 
           <h1></h1>
