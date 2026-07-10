@@ -1,0 +1,114 @@
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.menu-modal{
+
+    width:90%;
+    max-width:1000px;
+    height:90vh;
+
+    background:white;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.modal-header{
+
+    background:#5d4037;
+    color:white;
+
+    padding:20px 30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.close-btn{
+
+    background:none;
+    border:none;
+
+    color:white;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+}
+
+.modal-body{
+
+    background: url("/images/notebook-paper.jpg") center/cover no-repeat;
+    padding:30px;
+
+    overflow-y:auto;
+
+}
+
+.modal-body h3{
+
+    color:#8b4513;
+
+    margin-top:30px;
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    color:#666;
+    margin-bottom:15px;
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+table td{
+
+    padding:12px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+table td:last-child{
+
+    text-align:right;
+
+    font-weight:bold;
+
+    color:#8b4513;
+
+}
+
+hr{
+
+    margin:35px 0;
+
+    border:none;
+
+    border-top:1px solid #ddd;
+
+}

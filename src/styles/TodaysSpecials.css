@@ -1,0 +1,71 @@
+.today-specials {
+    padding: 100px 20px;
+    background: #f8f6f3;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title span {
+    color: #a65a18;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.section-title h2 {
+    font-size: 46px;
+    color: #5d4037;
+    margin: 15px 0;
+}
+
+.section-title p {
+    color: #666;
+    font-size: 18px;
+}
+
+.special-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+}
+
+.special-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+.special-card:hover {
+    transform: translateY(-8px);
+}
+
+.special-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.special-content {
+    padding: 25px;
+}
+
+.special-content h3 {
+    color: #5d4037;
+    margin-bottom: 10px;
+}
+
+.special-content p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.price {
+    color: #a65a18;
+    font-size: 24px;
+    font-weight: bold;
+}
