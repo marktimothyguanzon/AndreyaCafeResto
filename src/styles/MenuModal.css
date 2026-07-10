@@ -12,9 +12,8 @@
 
 .menu-modal{
 
-    width:90%;
-    max-width:1000px;
-    height:90vh;
+    width:min(95%, 1000px);
+    height:95vh;
 
     background:white;
 
