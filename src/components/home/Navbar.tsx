@@ -3,7 +3,7 @@ import logo from "../../assets/logo/logo.png";
 import "../../styles/Header.css";
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <header className="header">
@@ -15,28 +15,32 @@ function Navbar() {
         </div>
 
         <div
-          className="hamburger"
-          onClick={() => setMenuOpen(!menuOpen)}
+          className={`hamburger ${open ? "active" : ""}`}
+          onClick={() => setOpen(!open)}
         >
-          {menuOpen ? "✕" : "☰"}
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
 
-        <nav className={menuOpen ? "nav active" : "nav"}>
+        <nav className={open ? "nav active" : "nav"}>
+
           <ul>
 
-            <li><a href="#home" onClick={() => setMenuOpen(false)}>Home</a></li>
+            <li><a href="#home" onClick={()=>setOpen(false)}>Home</a></li>
 
-            <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
+            <li><a href="#about" onClick={()=>setOpen(false)}>About</a></li>
 
-            <li><a href="#menu" onClick={() => setMenuOpen(false)}>Menu</a></li>
+            <li><a href="#menu" onClick={()=>setOpen(false)}>Menu</a></li>
 
-            <li><a href="#gallery" onClick={() => setMenuOpen(false)}>Gallery</a></li>
+            <li><a href="#gallery" onClick={()=>setOpen(false)}>Gallery</a></li>
 
-            <li><a href="#reservation" onClick={() => setMenuOpen(false)}>Reservation</a></li>
+            <li><a href="#reservation" onClick={()=>setOpen(false)}>Reservation</a></li>
 
-            <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
+            <li><a href="#contact" onClick={()=>setOpen(false)}>Contact</a></li>
 
           </ul>
+
         </nav>
 
       </div>
