@@ -1,23 +1,190 @@
 import "../../styles/MenuModal.css";
 import notebook from "../../assets/images/notebook-paper.jpg";
 
-type MenuModalProps = {
-  isOpen: boolean;
+interface MenuModalProps {
   onClose: () => void;
-};
+}
 
-function MenuModal({ isOpen, onClose }: MenuModalProps) {
+const breakfast = [
+  ["Filipino Breakfast (Longganisa, Egg & Rice)", "₱139"],
+  ["Beef Tapa with Egg &Rice", "₱169"],
+  ["Corned Beef with Egg & Rice", "₱149"],
+  ["Tocino with Egg & Rice", "₱149"],
+  ["Spam with Egg & Rice", "₱169"],
+  ["Bangus with Egg & Rice", "₱179"],
+  ["Bacon with Egg & Rice", "₱169"],
+  ["Ham & Egg Sandwich", "₱119"],
+  ["Classic Clubhouse Sandwich", "₱169"],
+];
 
-  if (!isOpen) return null;
+const appetizers = [
+  ["French Fries", "₱89"],
+  ["Cheese Fries", "₱109"],
+  ["Loaded Fries", "₱149"],
+  ["Chicken Nuggets (6 pcs)", "₱139"],
+  ["Mozzarella Sticks", "₱159"],
+  ["Calamari", "₱189"],
+  ["Onion Rings", "₱109"],
+  ["Nachos Supreme", "₱199"],
+];
 
+const riceMeals = [
+  ["Crispy Chicken Fillet", "₱169"],
+  ["Chicken Teriyaki", "₱189"],
+  ["Pork Sisig", "₱189"],
+  ["Pork BBQ (2 sticks)", "₱179"],
+  ["Beef Caldereta", "₱219"],
+  ["Beef Kare-Kare", "₱239"],
+  ["Pork Steak", "₱199"],
+  ["Chicken Adobo", "₱179"],
+  ["Sweet & Sour Pork", "₱199"],
+  ["Buttered Chicken", "₱199"],
+  ["Garlic Butter Shrimp", "₱269"],
+];
+
+const pasta = [
+  ["Filipino Style Spaghetti", "₱159"],
+  ["Creamy Carbonara", "₱199"],
+  ["Chicken Alfredo", "₱229"],
+  ["Seafood Marinara", "₱249"],
+  ["Aglio e Olio", "₱189"],
+  ["Pesto Pasta", "₱209"],
+];
+
+const pizza = [
+  ["Hawaiian", "₱329"],
+  ["Pepperoni", "₱349"],
+  ["All Meat", "₱389"],
+  ["Supreme", "₱399"],
+  ["Four Cheese", "₱359"],
+  ["BBQ Chicken", "₱389"],
+];
+
+const burgers = [
+  ["Classic Cheeseburger", "₱169"],
+  ["Double Cheeseburger", "₱249"],
+  ["Crispy Chicken Burger", "₱179"],
+  ["BBQ Bacon Burger", "₱239"],
+];
+
+const houseSpecials = [
+  ["Pork Baby Back Ribs", "₱499"],
+  ["Grilled Pork Belly", "₱249"],
+  ["Crispy Pata (Sharing)", "₱799"],
+  ["Beef Steak", "₱359"],
+  ["Fish Fillet with Rice", "₱219"],
+];
+
+const salads = [
+  ["Caesar Salad", "₱189"],
+  ["Garden Salad", "₱169"],
+  ["Chicken Caesar Salad", "₱239"],
+  ["Tuna Salad", "₱229"],
+];
+
+const desserts = [
+  ["Chocolate Cake Slice", "₱149"],
+  ["Cheesecake", "₱159"],
+  ["Brownie à la Mode", "₱189"],
+  ["Ice Cream Sundae", "₱119"],
+  ["Halo-Halo Special", "₱159"],
+];
+
+const hotCoffee = [
+  ["Espresso", "₱99"],
+  ["Americano", "₱109"],
+  ["Café Latte", "₱129"],
+  ["Cappuccino", "₱129"],
+  ["Vanilla Latte", "₱139"],
+  ["Caramel Macchiato", "₱149"],
+  ["Mocha", "₱149"],
+  ["Hazelnut Latte", "₱149"],
+];
+
+const icedCoffee = [
+  ["Iced Americano", "₱119"],
+  ["Iced Latte", "₱139"],
+  ["Iced Mocha", "₱149"],
+  ["Caramel Latte", "₱149"],
+  ["Vanilla Latte", "₱149"],
+  ["Spanish Latte", "₱159"],
+  ["Hazelnut Latte", "₱159"],
+];
+
+const nonCoffee = [
+  ["Chocolate", "₱139"],
+  ["Matcha Latte", "₱149"],
+  ["Cookies & Cream", "₱149"],
+  ["Strawberry Milk", "₱149"],
+  ["Taro Milk", "₱149"],
+];
+
+const refreshers = [
+  ["Lemon Iced Tea", "₱99"],
+  ["Strawberry Lemonade", "₱129"],
+  ["Blueberry Lemonade", "₱129"],
+  ["Mango Cooler", "₱139"],
+  ["Green Apple Soda", "₱129"],
+  ["Lychee Soda", "₱129"],
+];
+
+const milkTea = [
+  ["Classic Milk Tea", "₱119"],
+  ["Wintermelon", "₱129"],
+  ["Okinawa", "₱129"],
+  ["Hokkaido", "₱129"],
+  ["Taro", "₱129"],
+  ["Brown Sugar", "₱139"],
+];
+
+const fruitShakes = [
+  ["Mango", "₱139"],
+  ["Banana", "₱129"],
+  ["Avocado", "₱149"],
+  ["Strawberry", "₱149"],
+  ["Mixed Berry", "₱159"],
+];
+
+const softDrinks = [
+  ["Coke", "₱55"],
+  ["Coke Zero", "₱55"],
+  ["Sprite", "₱55"],
+  ["Royal", "₱55"],
+  ["Bottled Water", "₱35"],
+];
+
+const signatures = [
+  ["Andreya Signature Burger", "₱299"],
+  ["Signature Chicken Alfredo", "₱259"],
+  ["Andreya Mixed Platter (Good for 2–3)", "₱699"],
+  ["Andreya Seafood Rice", "₱329"],
+  ["Signature Spanish Latte", "₱169"],
+  ["Andreya Chocolate Frappe", "₱179"],
+];
+
+function renderTable(items: string[][]) {
   return (
+    <table>
+      <tbody>
+        {items.map(([name, price]) => (
+          <tr key={name}>
+            <td>{name}</td>
+            <td>{price}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
 
+export default function MenuModal({ onClose }: MenuModalProps) {
+  return (
     <div className="modal-overlay">
 
       <div className="menu-modal">
 
-       <div className="modal-body"style={{ backgroundImage: `url(${notebook})` }}
->
+        <div className="modal-header">
+
           <h2>Andreya Café & Resto Menu</h2>
 
           <button
@@ -29,782 +196,132 @@ function MenuModal({ isOpen, onClose }: MenuModalProps) {
 
         </div>
 
-        <div className="modal-body">
+        <div
+          className="modal-body"
+          style={{
+            backgroundImage: `url(${notebook})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
 
-          {/* BREAKFAST */}
+          <h3>☀️ BREAKFAST FAVORITES</h3>
 
-          <h3>☀ Breakfast Favorites</h3>
+          <p className="subtitle">Served until 10:30 AM</p>
 
-          <p className="subtitle">
-            Served until 10:00 AM
-          </p>
-
-          <table>
-
-            <tbody>
-
-              <tr>
-                <td>Filipino Breakfast (Longganisa, Egg & Rice)</td>
-                <td>₱139</td>
-              </tr>
-
-              <tr>
-                <td>Beef Tapa with Egg & Rice</td>
-                <td>₱169</td>
-              </tr>
-
-              <tr>
-                <td>Corned Beef with Egg & Rice</td>
-                <td>₱149</td>
-              </tr>
-
-              <tr>
-                <td>Tocino with Egg & Rice</td>
-                <td>₱149</td>
-              </tr>
-
-              <tr>
-                <td>Spam with Egg & Rice</td>
-                <td>₱169</td>
-              </tr>
-
-              <tr>
-                <td>Bangus with Egg & Rice</td>
-                <td>₱179</td>
-              </tr>
-
-              <tr>
-                <td>Bacon with Egg & Rice</td>
-                <td>₱169</td>
-              </tr>
-
-            </tbody>
-
-          </table>
+          {renderTable(breakfast)}
 
           <hr />
 
-          {/* APPETIZERS */}
+          <h3>🍗 APPETIZERS</h3>
 
-          <h3>🍗 Appetizers</h3>
-
-          <table>
-
-            <tbody>
-
-              <tr>
-                <td>French Fries</td>
-                <td>₱89</td>
-              </tr>
-
-              <tr>
-                <td>Cheese Fries</td>
-                <td>₱109</td>
-              </tr>
-
-              <tr>
-                <td>Loaded Fries</td>
-                <td>₱149</td>
-              </tr>
-
-              <tr>
-                <td>Chicken Nuggets (6 pcs)</td>
-                <td>₱139</td>
-              </tr>
-
-              <tr>
-                <td>Mozzarella Sticks</td>
-                <td>₱159</td>
-              </tr>
-
-              <tr>
-                <td>Calamari</td>
-                <td>₱189</td>
-              </tr>
-
-              <tr>
-                <td>Onion Rings</td>
-                <td>₱109</td>
-              </tr>
-
-              <tr>
-                <td>Nachos Supreme</td>
-                <td>₱199</td>
-              </tr>
-
-            </tbody>
-
-          </table>
+          {renderTable(appetizers)}
 
           <hr />
-
-          {/* RICE MEALS */}
 
           <h3>🍛 RICE MEALS</h3>
 
-          <table>
-
-            <tbody>
-
-              <tr>
-                <td>Crispy Chicken Fillet</td>
-                <td>₱169</td>
-              </tr>
-
-              <tr>
-                <td>Chicken Teriyaki</td>
-                <td>₱189</td>
-              </tr>
-
-              <tr>
-                <td>Pork Sisig</td>
-                <td>₱189</td>
-              </tr>
-
-              <tr>
-                <td>Pork BBQ (2 sticks)</td>
-                <td>₱179</td>
-              </tr>
-
-              <tr>
-                <td>Beef Caldereta</td>
-                <td>₱219</td>
-              </tr>
-
-              <tr>
-                <td>Beef Kare-Kare</td>
-                <td>₱239</td>
-              </tr>
-
-              <tr>
-                <td>Pork Steak</td>
-                <td>₱199</td>
-              </tr>
-
-              <tr>
-                <td>Chicken Adobo</td>
-                <td>₱179</td>
-              </tr>
-
-              <tr>
-                <td>Sweet & Sour Pork</td>
-                <td>₱199</td>
-              </tr>
-
-              <tr>
-                <td>Buttered Chicken</td>
-                <td>₱199</td>
-              </tr>
-
-              <tr>
-                <td>Garlic Butter Shrimp</td>
-                <td>₱249</td>
-              </tr>
-
-            </tbody>
-
-          </table>
+          {renderTable(riceMeals)}
 
           <hr />
 
-          {/* PASTA */}
+          <h3>🍝 PASTA</h3>
 
-          <h3>🍝 PASTA </h3>
-
-          <table>
-
-            <tbody>
-
-              <tr>
-                <td>Filipino Style Spaghetti</td>
-                <td>₱159</td>
-              </tr>
-
-              <tr>
-                <td>Creamy Carbonara</td>
-                <td>₱199</td>
-              </tr>
-
-              <tr>
-                <td>Chicken Alfredo</td>
-                <td>₱299</td>
-              </tr>
-
-              <tr>
-                <td>Pesto Pasta</td>
-                <td>₱189</td>
-              </tr>
-
-              <tr>
-                <td>Seafood Marinara</td>
-                <td>₱249</td>
-              </tr>
-
-              <tr>
-                <td>Aglio e Olio</td>
-                <td>₱189</td>
-              </tr>
-
-            </tbody>
-
-          </table>
+          {renderTable(pasta)}
 
           <hr />
 
-           {/* PIZZA */}
+          <h3>🍕 PIZZA (10")</h3>
 
-          <h3>🍕 PIZZA (10") </h3>
-
-          <table>
-
-            <tbody>
-
-              <tr>
-                <td>Hawaiian</td>
-                <td>₱329</td>
-              </tr>
-
-              <tr>
-                <td>Pepperoni</td>
-                <td>₱349</td>
-              </tr>
-
-              <tr>
-                <td>All Meat</td>
-                <td>₱389</td>
-              </tr>
-
-              <tr>
-                <td>Supreme</td>
-                <td>₱399</td>
-              </tr>
-
-              <tr>
-                <td>Four Cheese</td>
-                <td>₱349</td>
-              </tr>
-
-              <tr>
-                <td>BBQ Chicken</td>
-                <td>₱389</td>
-              </tr>
-
-            </tbody>
-
-          </table>
+          {renderTable(pizza)}
 
           <hr />
 
-        {/* BURGERS */}
+          <h3>🍔 BURGERS</h3>
 
-          <h3>🍔 BURGERS </h3>
+          {renderTable(burgers)}
 
           <table>
-
             <tbody>
-
               <tr>
-                <td>Classic Cheeseburger</td>
-                <td>₱169</td>
-              </tr>
-
-              <tr>
-                <td>Double Cheeseburger</td>
-                <td>₱249</td>
-              </tr>
-
-              <tr>
-                <td>Crispy Chicken Burger</td>
-                <td>₱179</td>
-              </tr>
-
-              <tr>
-                <td>BBQ Bacon Burger</td>
-                <td>₱239</td>
-              </tr>
-
-              <tr>
-                <td><i>Served with fries</i></td>
+                <td>
+                  <i>Served with fries.</i>
+                </td>
                 <td></td>
               </tr>
-
             </tbody>
-
           </table>
 
           <hr />
 
-          {/* HOUSE SPECIALS */}
+          <h3>🥩 HOUSE SPECIALS</h3>
 
-<h3>🥩 HOUSE SPECIALS</h3>
-
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Pork Baby Back Ribs</td>
-      <td>₱499</td>
-    </tr>
-
-    <tr>
-      <td>Grilled Pork Belly</td>
-      <td>₱249</td>
-    </tr>
-
-    <tr>
-      <td>Crispy Pata (Sharing)</td>
-      <td>₱799</td>
-    </tr>
-
-    <tr>
-      <td>Beef Steak</td>
-      <td>₱359</td>
-    </tr>
-
-    <tr>
-      <td>Fish Fillet with Rice</td>
-      <td>₱219</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(houseSpecials)}
 
 <hr />
-
-{/* SALADS */}
 
 <h3>🥗 SALADS</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Caesar Salad</td>
-      <td>₱189</td>
-    </tr>
-
-    <tr>
-      <td>Garden Salad</td>
-      <td>₱169</td>
-    </tr>
-
-    <tr>
-      <td>Chicken Caesar Salad</td>
-      <td>₱239</td>
-    </tr>
-
-    <tr>
-      <td>Tuna Salad</td>
-      <td>₱229</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(salads)}
 
 <hr />
-
-{/* DESSERTS */}
 
 <h3>🍰 DESSERTS</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Chocolate Cake Slice</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Cheesecake</td>
-      <td>₱159</td>
-    </tr>
-
-    <tr>
-      <td>Brownie à la Mode</td>
-      <td>₱189</td>
-    </tr>
-
-    <tr>
-      <td>Ice Cream Sundae</td>
-      <td>₱119</td>
-    </tr>
-
-    <tr>
-      <td>Halo-Halo Special</td>
-      <td>₱159</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(desserts)}
 
 <hr />
-
-{/* HOT COFFEE */}
 
 <h3>☕ HOT COFFEE</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Espresso</td>
-      <td>₱99</td>
-    </tr>
-
-    <tr>
-      <td>Americano</td>
-      <td>₱109</td>
-    </tr>
-
-    <tr>
-      <td>Café Latte</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Cappuccino</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Vanilla Latte</td>
-      <td>₱139</td>
-    </tr>
-
-    <tr>
-      <td>Caramel Macchiato</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Mocha</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Hazelnut Latte</td>
-      <td>₱149</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(hotCoffee)}
 
 <hr />
-
-{/* ICED COFFEE */}
 
 <h3>🧊 ICED COFFEE</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Iced Americano</td>
-      <td>₱119</td>
-    </tr>
-
-    <tr>
-      <td>Iced Latte</td>
-      <td>₱139</td>
-    </tr>
-
-    <tr>
-      <td>Iced Mocha</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Caramel Latte</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Vanilla Latte</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Spanish Latte</td>
-      <td>₱159</td>
-    </tr>
-
-    <tr>
-      <td>Hazelnut Latte</td>
-      <td>₱159</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(icedCoffee)}
 
 <hr />
-
-{/* NON-COFFEE */}
 
 <h3>🥤 NON-COFFEE</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Chocolate</td>
-      <td>₱139</td>
-    </tr>
-
-    <tr>
-      <td>Matcha Latte</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Cookies & Cream</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Strawberry Milk</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Taro Milk</td>
-      <td>₱149</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(nonCoffee)}
 
 <hr />
-
-{/* FRUIT REFRESHERS */}
 
 <h3>🍓 FRUIT REFRESHERS</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Lemon Iced Tea</td>
-      <td>₱99</td>
-    </tr>
-
-    <tr>
-      <td>Strawberry Lemonade</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Blueberry Lemonade</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Mango Cooler</td>
-      <td>₱139</td>
-    </tr>
-
-    <tr>
-      <td>Green Apple Soda</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Lychee Soda</td>
-      <td>₱129</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(refreshers)}
 
 <hr />
 
-{/* MILK TEA */}
+<h3>🧋 MILK TEA</h3>
 
-<h3>🥤 MILK TEA</h3>
-
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Classic Milk Tea</td>
-      <td>₱119</td>
-    </tr>
-
-    <tr>
-      <td>Wintermelon</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Okinawa</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Hokkaido</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Taro</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Brown Sugar</td>
-      <td>₱139</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(milkTea)}
 
 <hr />
-
-{/* FRUIT SHAKES */}
 
 <h3>🍹 FRUIT SHAKES</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Mango</td>
-      <td>₱139</td>
-    </tr>
-
-    <tr>
-      <td>Banana</td>
-      <td>₱129</td>
-    </tr>
-
-    <tr>
-      <td>Avocado</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Strawberry</td>
-      <td>₱149</td>
-    </tr>
-
-    <tr>
-      <td>Mixed Berry</td>
-      <td>₱159</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(fruitShakes)}
 
 <hr />
-
-{/* SOFT DRINKS */}
 
 <h3>🥤 SOFT DRINKS</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Coke</td>
-      <td>₱55</td>
-    </tr>
-
-    <tr>
-      <td>Coke Zero</td>
-      <td>₱55</td>
-    </tr>
-
-    <tr>
-      <td>Sprite</td>
-      <td>₱55</td>
-    </tr>
-
-    <tr>
-      <td>Royal</td>
-      <td>₱55</td>
-    </tr>
-
-    <tr>
-      <td>Bottled Water</td>
-      <td>₱35</td>
-    </tr>
-
-  </tbody>
-
-</table>
+{renderTable(softDrinks)}
 
 <hr />
-
-{/* ANDREYA SIGNATURES */}
 
 <h3>⭐ ANDREYA SIGNATURES</h3>
 
-<table>
-
-  <tbody>
-
-    <tr>
-      <td>Andreya Signature Burger</td>
-      <td>₱299</td>
-    </tr>
-
-    <tr>
-      <td>Signature Chicken Alfredo</td>
-      <td>₱259</td>
-    </tr>
-
-    <tr>
-      <td>Andreya Mixed Platter (Good for 2–3)</td>
-      <td>₱699</td>
-    </tr>
-
-    <tr>
-      <td>Andreya Seafood Rice</td>
-      <td>₱329</td>
-    </tr>
-
-    <tr>
-      <td>Signature Spanish Latte</td>
-      <td>₱169</td>
-    </tr>
-
-    <tr>
-      <td>Andreya Chocolate Frappe</td>
-      <td>₱179</td>
-    </tr>
-
-  </tbody>
-
-</table>
-
-<hr />
+{renderTable(signatures)}
 
         </div>
 
       </div>
 
     </div>
-
   );
 }
-
-export default MenuModal;
