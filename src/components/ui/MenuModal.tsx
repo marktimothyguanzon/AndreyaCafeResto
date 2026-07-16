@@ -2,6 +2,7 @@ import "../../styles/MenuModal.css";
 import notebook from "../../assets/images/notebook-paper.jpg";
 
 interface MenuModalProps {
+  isOpen: boolean;
   onClose: () => void;
 }
 
@@ -177,7 +178,12 @@ function renderTable(items: string[][]) {
   );
 }
 
-export default function MenuModal({ onClose }: MenuModalProps) {
+export default function MenuModal({
+  isOpen,
+  onClose,
+}: MenuModalProps) {
+
+  if (!isOpen) return null;
   return (
     <div className="modal-overlay">
 

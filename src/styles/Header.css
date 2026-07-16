@@ -1,199 +1,139 @@
+/* ===========================
+   HEADER
+=========================== */
+
 .header{
-
-    width:100%;
-
-    position:sticky;
-
+    position:fixed;
     top:0;
-
+    left:0;
+    width:100%;
     z-index:999;
 
-    background:white;
-
-    box-shadow:0 2px 15px rgba(0,0,0,.08);
-
-}
-
-.container{
-
-    max-width:1200px;
-
-    margin:auto;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
-    padding:15px 25px;
+    padding:15px 60px;
 
+    background:#000;
+    color:#fff;
+
+    box-sizing:border-box;
 }
 
 .logo img{
-
-    width:65px;
-
+    width:80px;
+    display:block;
 }
 
-.nav ul{
+/* ===========================
+   NAVIGATION
+=========================== */
 
+.nav-links{
     display:flex;
-
+    align-items:center;
     gap:35px;
 
     list-style:none;
-
+    margin:0;
+    padding:0;
 }
 
-.nav a{
+.nav-links li{
+    list-style:none;
+}
 
+.nav-links a{
+    color:#fff;
     text-decoration:none;
-
-    color:#5d4037;
-
-    font-weight:600;
-
+    font-size:18px;
+    transition:.3s;
 }
 
-/* Hamburger */
+.nav-links a:hover{
+    color:#D4AF37;
+}
+
+/* ===========================
+   HAMBURGER
+=========================== */
 
 .hamburger{
-
-    width:35px;
-
-    height:28px;
-
     display:none;
 
-    flex-direction:column;
+    width:35px;
+    height:28px;
 
+    flex-direction:column;
     justify-content:space-between;
 
     cursor:pointer;
-
 }
 
 .hamburger span{
-
     width:100%;
-
     height:4px;
 
-    background:#5d4037;
+    background:#D4AF37;
 
-    border-radius:20px;
+    border-radius:10px;
 
-    transition:.35s;
-
+    transition:.3s;
 }
 
+/* Animation */
+
 .hamburger.active span:nth-child(1){
-
-    transform:rotate(45deg) translate(7px,7px);
-
+    transform:rotate(45deg) translate(8px,8px);
 }
 
 .hamburger.active span:nth-child(2){
-
     opacity:0;
-
 }
 
 .hamburger.active span:nth-child(3){
-
     transform:rotate(-45deg) translate(8px,-8px);
-
 }
 
-/* MOBILE */
+/* ===========================
+   TABLET & MOBILE
+=========================== */
 
-@media(max-width:768px){
+@media (max-width:768px){
 
-.container{
-
-padding:15px 20px;
-
+    .hamburger{
+    display:none;
 }
 
-.logo img{
+@media (max-width:768px){
 
-width:55px;
+    .hamburger{
+        display:flex;
+    }
 
+    .nav-links{
+        display:none;
+
+        position:absolute;
+        top:100%;
+        left:0;
+
+        width:100%;
+
+        background:#000;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        padding:20px 0;
+
+        gap:20px;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
 }
-
-.hamburger{
-
-display:flex;
-
-}
-
-.nav{
-
-position:absolute;
-
-top:100%;
-
-left:0;
-
-width:100%;
-
-background:white;
-
-display:none;
-
-box-shadow:0 5px 20px rgba(0,0,0,.15);
-
-}
-
-.nav.active{
-
-display:block;
-
-animation:slide .35s;
-
-}
-
-.nav ul{
-
-flex-direction:column;
-
-gap:0;
-
-}
-
-.nav li{
-
-border-bottom:1px solid #eee;
-
-}
-
-.nav a{
-
-display:block;
-
-padding:18px;
-
-}
-
-}
-
-@keyframes slide{
-
-from{
-
-opacity:0;
-
-transform:translateY(-20px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
 }
